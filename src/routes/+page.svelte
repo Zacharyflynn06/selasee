@@ -205,7 +205,7 @@
 				</div>
 			</div>
 			<div class="relative">
-				<img src="/Full Band.webp" alt="Selasee performing live" class="rounded-lg shadow-2xl" />
+				<img src="/Selasee Hero.webp" alt="Selasee performing live" class="rounded-lg shadow-2xl" />
 				<div
 					class="absolute -right-6 -bottom-6 h-full w-full rounded-lg border-4 border-yellow-400"
 				></div>
@@ -237,8 +237,8 @@
 		<div class="grid items-center gap-12 md:grid-cols-2">
 			<div class="relative">
 				<img
-					src="/Jazz Is Dead 5.4.25 (3).webp"
-					alt="Selasee performing at Jazz Is Dead"
+					src="/Full Band.webp"
+					alt="Selasee and the Fafa Family performing live"
 					class="rounded-lg shadow-2xl"
 				/>
 				<div
