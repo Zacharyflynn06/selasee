@@ -205,7 +205,7 @@
 				</div>
 			</div>
 			<div class="relative">
-				<img src="/Selasee Hero.webp" alt="Selasee performing live" class="rounded-lg shadow-2xl" />
+				<img src="/Full Band.webp" alt="Selasee performing live" class="rounded-lg shadow-2xl" />
 				<div
 					class="absolute -right-6 -bottom-6 h-full w-full rounded-lg border-4 border-yellow-400"
 				></div>
@@ -332,15 +332,15 @@
 			<Card.Root class="group overflow-hidden p-0">
 				<div class="relative">
 					<img
-						src="/Jazz Is Dead 5.4.25 (7).webp"
-						alt="Jazz Is Dead, Denver"
+						src="/Selasee Atiase.webp"
+						alt="Selasee Atiase on vocals and guitar"
 						class="h-72 w-full object-cover transition-transform duration-300 group-hover:scale-110"
 					/>
 					<div
 						class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"
 					>
 						<p class="absolute bottom-4 left-4 text-lg font-semibold text-white">
-							Jazz Is Dead — Denver, CO
+							Selasee Atiase — Vocals, Guitar
 						</p>
 					</div>
 				</div>
