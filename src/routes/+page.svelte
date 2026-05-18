@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import Navigation from '$lib/components/Navigation.svelte';
 	import SectionDivider from '$lib/components/SectionDivider.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
@@ -13,15 +12,29 @@
 
 	let { data }: { data: PageData } = $props();
 
-	let submitted = $state(false);
+	type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
+	let formStatus = $state<FormStatus>('idle');
 
-	onMount(() => {
-		const params = new URLSearchParams(window.location.search);
-		if (params.get('submitted') === '1') {
-			submitted = true;
-			history.replaceState({}, '', window.location.pathname + '#contact');
+	async function handleSubmit(e: SubmitEvent) {
+		e.preventDefault();
+		formStatus = 'submitting';
+		const form = e.target as HTMLFormElement;
+		try {
+			const res = await fetch('/forms.html', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				body: new URLSearchParams(new FormData(form) as unknown as Record<string, string>).toString()
+			});
+			if (res.ok) {
+				formStatus = 'success';
+				form.reset();
+			} else {
+				formStatus = 'error';
+			}
+		} catch {
+			formStatus = 'error';
 		}
-	});
+	}
 </script>
 
 <svelte:head>
@@ -478,7 +491,7 @@
 			class="mx-auto max-w-xl border-ghana-gold/40 bg-zinc-900 shadow-xl shadow-ghana-gold/10"
 		>
 			<Card.Content class="pt-6">
-				{#if submitted}
+				{#if formStatus === 'success'}
 					<div class="py-6 text-center">
 						<div
 							class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-ghana-green"
@@ -488,7 +501,7 @@
 						<h3 class="mb-2 text-2xl font-bold">Message Sent!</h3>
 						<p class="text-white/60">Thanks for reaching out — we'll get back to you soon.</p>
 						<button
-							onclick={() => (submitted = false)}
+							onclick={() => (formStatus = 'idle')}
 							class="mt-6 text-sm text-ghana-gold underline underline-offset-2 hover:text-ghana-gold/80"
 						>
 							Send another message
@@ -497,10 +510,8 @@
 				{:else}
 					<form
 						name="contact"
-						method="POST"
-						action="/?submitted=1#contact"
 						data-netlify="true"
-						netlify-honeypot="bot-field"
+						onsubmit={handleSubmit}
 						class="space-y-6"
 					>
 						<input type="hidden" name="form-name" value="contact" />
