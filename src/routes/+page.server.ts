@@ -53,6 +53,8 @@ function formatDate(iso: string): { date: string; monthAbbr: string; day: number
 	};
 }
 
+export const prerender = true;
+
 export const load: PageServerLoad = async ({ fetch }) => {
 	const res = await fetch(
 		`https://rest.bandsintown.com/artists/id_${BANDS_IN_TOWN_ARTIST_KEY}/events?app_id=${BANDS_IN_TOWN_API_KEY}`

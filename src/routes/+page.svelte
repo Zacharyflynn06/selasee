@@ -20,7 +20,7 @@
 		formStatus = 'submitting';
 		const form = e.target as HTMLFormElement;
 		try {
-			const res = await fetch('/forms.html', {
+			const res = await fetch('/', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				body: new URLSearchParams(new FormData(form) as unknown as Record<string, string>).toString()
