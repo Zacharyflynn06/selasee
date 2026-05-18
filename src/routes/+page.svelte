@@ -480,15 +480,15 @@
 <SectionDivider />
 
 <!-- Contact -->
-<section id="contact" class="bg-black py-20 text-white">
+<section id="contact" class="bg-white py-20 text-gray-900 dark:bg-black dark:text-white">
 	<div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
 		<div class="mb-12 text-center">
 			<h2 class="mb-4 text-4xl font-bold">Get in Touch</h2>
-			<p class="text-xl text-white/60">Booking inquiries & more</p>
+			<p class="text-xl text-gray-500 dark:text-white/60">Booking inquiries & more</p>
 		</div>
 
 		<Card.Root
-			class="mx-auto max-w-xl border-ghana-gold/40 bg-zinc-900 shadow-xl shadow-ghana-gold/10"
+			class="mx-auto max-w-xl border-ghana-gold/40 bg-white shadow-xl shadow-ghana-gold/10 dark:bg-zinc-900"
 		>
 			<Card.Content class="pt-6">
 				{#if formStatus === 'success'}
@@ -496,10 +496,10 @@
 						<div
 							class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-ghana-green"
 						>
-							<Mail class="h-8 w-8" />
+							<Mail class="h-8 w-8 text-white" />
 						</div>
-						<h3 class="mb-2 text-2xl font-bold">Message Sent!</h3>
-						<p class="text-white/60">Thanks for reaching out — we'll get back to you soon.</p>
+						<h3 class="mb-2 text-2xl font-bold text-gray-900 dark:text-white">Message Sent!</h3>
+						<p class="text-gray-500 dark:text-white/60">Thanks for reaching out — we'll get back to you soon.</p>
 						<button
 							onclick={() => (formStatus = 'idle')}
 							class="mt-6 text-sm text-ghana-gold underline underline-offset-2 hover:text-ghana-gold/80"
@@ -519,38 +519,38 @@
 
 						<div class="grid gap-6 sm:grid-cols-2">
 							<div class="space-y-2">
-								<Label for="name" class="text-white/80">Name</Label>
+								<Label for="name" class="text-gray-700 dark:text-white/80">Name</Label>
 								<Input
 									id="name"
 									name="name"
 									type="text"
 									required
 									placeholder="Your name"
-									class="border-white/20 bg-white/10 text-white placeholder-white/40 focus-visible:ring-ghana-gold"
+									class="border-gray-300 bg-gray-50 text-gray-900 placeholder-gray-400 focus-visible:ring-ghana-gold dark:border-white/20 dark:bg-white/10 dark:text-white dark:placeholder-white/40"
 								/>
 							</div>
 							<div class="space-y-2">
-								<Label for="email" class="text-white/80">Email</Label>
+								<Label for="email" class="text-gray-700 dark:text-white/80">Email</Label>
 								<Input
 									id="email"
 									name="email"
 									type="email"
 									required
 									placeholder="your@email.com"
-									class="border-white/20 bg-white/10 text-white placeholder-white/40 focus-visible:ring-ghana-gold"
+									class="border-gray-300 bg-gray-50 text-gray-900 placeholder-gray-400 focus-visible:ring-ghana-gold dark:border-white/20 dark:bg-white/10 dark:text-white dark:placeholder-white/40"
 								/>
 							</div>
 						</div>
 
 						<div class="space-y-2">
-							<Label for="message" class="text-white/80">Message</Label>
+							<Label for="message" class="text-gray-700 dark:text-white/80">Message</Label>
 							<Textarea
 								id="message"
 								name="message"
 								rows={5}
 								required
 								placeholder="Tell us about your event, booking inquiry, or just say hello..."
-								class="resize-none border-white/20 bg-white/10 text-white placeholder-white/40 focus-visible:ring-ghana-gold"
+								class="resize-none border-gray-300 bg-gray-50 text-gray-900 placeholder-gray-400 focus-visible:ring-ghana-gold dark:border-white/20 dark:bg-white/10 dark:text-white dark:placeholder-white/40"
 							/>
 						</div>
 
@@ -572,11 +572,11 @@
 		<div class="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
 			<!-- Left: logo + social links -->
 			<div>
-				<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-black">
+				<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 dark:bg-zinc-800">
 					<img src="/selasee-fafa-family-logo.webp" alt="Selasee" class="h-10 w-10" />
 				</div>
 				<div
-					class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium text-ghana-gold/70"
+					class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium text-gray-500 dark:text-ghana-gold/70"
 				>
 					<a
 						href="https://www.instagram.com/selasee_fafafamily"
@@ -619,8 +619,8 @@
 
 			<!-- Right: tagline + zfdev -->
 			<div class="text-right">
-				<p class="mb-1 text-sm text-ghana-gold">Feel good world music, reggae and highlife.</p>
-				<p class="text-base text-ghana-gold">
+				<p class="mb-1 text-sm text-gray-500 dark:text-ghana-gold">Feel good world music, reggae and highlife.</p>
+				<p class="text-base text-gray-500 dark:text-ghana-gold">
 					Website by
 					<a
 						href="https://zacflynn.dev/"
