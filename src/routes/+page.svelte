@@ -1,11 +1,11 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import Navigation from '$lib/components/Navigation.svelte';
 	import SectionDivider from '$lib/components/SectionDivider.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { Separator } from '$lib/components/ui/separator/index.js';
-	import { Calendar, Mail, MapPin, Clock, ExternalLink, Ticket } from 'lucide-svelte';
-	import { Badge } from '$lib/components/ui/badge/index.js';
+	import { Mail, MapPin, Clock, Ticket } from 'lucide-svelte';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Textarea } from '$lib/components/ui/textarea/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
@@ -13,27 +13,15 @@
 
 	let { data }: { data: PageData } = $props();
 
-	type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
-	let formStatus = $state<FormStatus>('idle');
+	let submitted = $state(false);
 
-	async function handleSubmit(e: SubmitEvent) {
-		e.preventDefault();
-		formStatus = 'submitting';
-		const form = e.target as HTMLFormElement;
-		try {
-			const res = await fetch('/', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: new URLSearchParams(
-					new FormData(form) as unknown as Record<string, string>
-				).toString()
-			});
-			formStatus = res.ok ? 'success' : 'error';
-			if (res.ok) form.reset();
-		} catch {
-			formStatus = 'error';
+	onMount(() => {
+		const params = new URLSearchParams(window.location.search);
+		if (params.get('submitted') === '1') {
+			submitted = true;
+			history.replaceState({}, '', window.location.pathname + '#contact');
 		}
-	}
+	});
 </script>
 
 <svelte:head>
@@ -490,7 +478,7 @@
 			class="mx-auto max-w-xl border-ghana-gold/40 bg-zinc-900 shadow-xl shadow-ghana-gold/10"
 		>
 			<Card.Content class="pt-6">
-				{#if formStatus === 'success'}
+				{#if submitted}
 					<div class="py-6 text-center">
 						<div
 							class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-ghana-green"
@@ -500,8 +488,8 @@
 						<h3 class="mb-2 text-2xl font-bold">Message Sent!</h3>
 						<p class="text-white/60">Thanks for reaching out — we'll get back to you soon.</p>
 						<button
-							onclick={() => (formStatus = 'idle')}
-							class="mt-6 text-sm text-ghana-green underline underline-offset-2 hover:text-ghana-green/80 dark:text-ghana-gold dark:hover:text-ghana-gold/80"
+							onclick={() => (submitted = false)}
+							class="mt-6 text-sm text-ghana-gold underline underline-offset-2 hover:text-ghana-gold/80"
 						>
 							Send another message
 						</button>
@@ -509,9 +497,10 @@
 				{:else}
 					<form
 						name="contact"
+						method="POST"
+						action="/?submitted=1#contact"
 						data-netlify="true"
 						netlify-honeypot="bot-field"
-						onsubmit={handleSubmit}
 						class="space-y-6"
 					>
 						<input type="hidden" name="form-name" value="contact" />
@@ -554,19 +543,12 @@
 							/>
 						</div>
 
-						{#if formStatus === 'error'}
-							<p class="text-sm text-red-400">
-								Something went wrong — please try again or email us directly.
-							</p>
-						{/if}
-
 						<div class="flex justify-end">
 							<Button
 								type="submit"
-								disabled={formStatus === 'submitting'}
-								class="rounded-full bg-ghana-gold px-8 font-semibold text-black hover:bg-ghana-gold/80 disabled:opacity-60"
+								class="rounded-full bg-ghana-gold px-8 font-semibold text-black hover:bg-ghana-gold/80"
 							>
-								{formStatus === 'submitting' ? 'Sending…' : 'Send Message'}
+								Send Message
 							</Button>
 						</div>
 					</form>
